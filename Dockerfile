@@ -26,9 +26,11 @@ VOLUME /config
 
 EXPOSE 6060 6061
 
+COPY dao_clair_config.yml /etc/dao_clair_config.yml
 ADD .   /go/src/github.com/coreos/clair/
 WORKDIR /go/src/github.com/coreos/clair/
 
 RUN go install -v github.com/coreos/clair/cmd/clair
 
 ENTRYPOINT ["clair"]
+CMD ["-config", "/etc/dao_clair_config.yml"]
